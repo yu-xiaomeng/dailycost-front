@@ -1,3 +1,18 @@
-/* .tabBar {
-    bottom: 0px;
-} */
+.aaa {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+  }
+  
+  .pagecontent {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bottom {
+    flex: 0 1;
+    border-top: solid 1px var(--adm-border-color);
+  }

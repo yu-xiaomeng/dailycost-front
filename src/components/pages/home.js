@@ -28,8 +28,6 @@ class Home extends React.Component {
                             DAILY COST 
                         </div>
                         { button }
-                        
-                        
                     </div>
                     
                 </div>

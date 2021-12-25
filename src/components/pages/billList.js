@@ -1,9 +1,11 @@
 import React from "react";
 import { Row, Col, DatePicker } from 'antd';
+
 import { CaretDownOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import axios from "axios";
 import cookie from "react-cookies";
+import BottomBar from "../tabs/bottomBar";
 
 class BillList extends React.Component {
     state = {
@@ -41,6 +43,7 @@ class BillList extends React.Component {
 
     render () {
         const monthFormat = 'MM';
+        
         return (
             <div className="bill-list">
                 <div className="title">
@@ -73,6 +76,9 @@ class BillList extends React.Component {
                     <Col span={7}>{this.state.monthlyExpense}</Col>
                 </Row>
                     
+                </div>
+                <div className="tab-bar"> 
+                    <BottomBar />
                 </div>
             </div>
         )    

@@ -1,6 +1,7 @@
 .bill-list {
     height: 100%;
     width: 100%;
+    position: relative;
 }
 
 .title {
@@ -28,4 +29,12 @@
 
 .ant-picker {
     background: #F9DA61;
+}
+
+.tab-bar {
+  position: absolute;
+  bottom: 0;
+  height:70px;
+  width: 100%;
+  background-color: #fbfbfb;
 }
