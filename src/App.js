@@ -8,6 +8,7 @@ import Home from './components/pages/home';
 import Login from './components/pages/login';
 import BillList from "./components/pages/billList";
 import Me from "./components/pages/me";
+import BillDetail from "./components/pages/billDetail";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/login' element={<Login/>} />
           <Route path='/billList' element={<BillList/>}/>
           <Route path='/me' element={<Me/>}/>
+          <Route path='/bill/:id' element={<BillDetail />}/>
         </Routes>
     </Router>
   );
