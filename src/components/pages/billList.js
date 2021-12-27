@@ -1,11 +1,12 @@
 import React from "react";
-import { Row, Col, DatePicker } from 'antd';
+import { Row, Col, DatePicker, Empty } from 'antd';
 
 import { CaretDownOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import axios from "axios";
 import cookie from "react-cookies";
 import BottomBar from "../tabs/bottomBar";
+import DayBillList from "../lists/dayBillList";
 
 class BillList extends React.Component {
     state = {
@@ -14,6 +15,7 @@ class BillList extends React.Component {
         month: new Date().getMonth()+1,
         monthlyIncome: 0,
         monthlyExpense: 0,
+        billList: [],
     };
 
     getMonthlyBill() {
@@ -29,20 +31,53 @@ class BillList extends React.Component {
         })
     }
 
+    getMonthlyBillList() {
+        axios.get('/api/bill/list',{
+            params: {
+              date: this.state.year+'-'+this.state.month
+            },
+            headers: {"Authorization": 'Bearer '+this.state.token}
+        }).then(res => {
+            this.setState({billList: []});
+            this.setState({billList: res.data.data}); 
+            
+        })
+    }
+
     componentDidMount() {
         this.getMonthlyBill();
+        this.getMonthlyBillList();
     }
 
     handleChange = (value, dateString) => {
         setTimeout(() => { 
             this.setState({year: value.format("YYYY"), month: dateString});
             this.getMonthlyBill();
+            this.getMonthlyBillList();
         });
-        
     }
 
     render () {
         const monthFormat = 'MM';
+        const billList = this.state.billList;
+        let dayBillList = (<Empty />);
+        
+        if (billList.length > 0) {
+            dayBillList = (
+                <div id="scrollableDiv"
+                        style={{
+                        height: 640,
+                        overflow: 'auto',
+                        padding: '0 1px',
+                        }}>
+                        {
+                            billList.map((item, index) =>{
+                                return  <DayBillList key={index} data={item}/>
+                            })
+                        }
+                    </div>
+            );
+        }
         
         return (
             <div className="bill-list">
@@ -76,6 +111,9 @@ class BillList extends React.Component {
                     <Col span={7}>{this.state.monthlyExpense}</Col>
                 </Row>
                     
+                </div>
+                <div className="monthly-bill-list">
+                    {dayBillList}
                 </div>
                 <div className="tab-bar"> 
                     <BottomBar />

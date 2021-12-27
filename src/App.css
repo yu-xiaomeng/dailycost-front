@@ -3,6 +3,7 @@
 @import './style/home.css';
 @import './style/tabbar.css';
 @import './style/billList.css';
+@import './style/dayBillList.css';
 
 #root {
   height: 100%;
