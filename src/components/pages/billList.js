@@ -59,7 +59,7 @@ class BillList extends React.Component {
 
     render () {
         const monthFormat = 'MM';
-        const billList = this.state.billList;
+        let billList = this.state.billList;
         let dayBillList = (<Empty />);
         
         if (billList.length > 0) {
@@ -96,7 +96,7 @@ class BillList extends React.Component {
                     <Col span={4}>
                     <DatePicker 
                         picker='month'
-                        defaultValue={moment('12', monthFormat)}
+                        defaultValue={moment(this.state.month, monthFormat)}
                         format={monthFormat}
                         inputReadOnly={true}
                         bordered={false}

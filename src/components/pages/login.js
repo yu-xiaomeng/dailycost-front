@@ -58,7 +58,6 @@ class Login extends React.Component {
 
                 <Form 
                     onFinish={this.handleSubmit} 
-                    initialValues={{ username: "yuxiaomeng", password: "20211030.y" }}
                     style={{ maxWidth: '300px' }}>
                     <Form.Item
                         name="username"
@@ -78,6 +77,7 @@ class Login extends React.Component {
                     >
                         <Input.Password
                             name="password"
+                            type="password"
                             prefix={<LockOutlined size={13} />}
                             placeholder="密码"
                             iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
