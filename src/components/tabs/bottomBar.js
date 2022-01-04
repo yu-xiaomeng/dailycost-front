@@ -26,7 +26,7 @@ function BottomBar () {
             icon: <FileOutline />,
         },
         {
-            key: '/createBill',
+            key: '/bill/new',
             title: '记一笔',
             icon: <AddCircleOutline />,
         },
