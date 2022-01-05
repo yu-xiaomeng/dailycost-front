@@ -6,40 +6,63 @@ import {
     Form,
     Input,
     Button,
-    Dialog,
     DatePicker,
     Selector,
     Space,
     Radio,
+    NavBar,
   } from 'antd-mobile';
 import dayjs from 'dayjs';
+import { Navigate } from "react-router-dom";
 
 class EditBill extends React.Component {
     state = {
         pickerVisible: false,
         token: cookie.load("token"),
-        category: {},
-        categoryValue: "",
+        category: [],
+        categoryCur: [],
+        type: "EXPENSE",
+        createStatus: 0,
     }
     componentDidMount() {
-        this.getCategoryByType();
+        this.getCategory();
     }
 
     onFinish = (values) => {
-        // values.type = values.type[0];
-        // values.date = dayjs(values.date).format('YYYY-MM-DD')
-        // console.log(JSON.stringify(values));
-
+        // console.log(values)
         this.createNewBill(values);
     }
 
-    getCategoryByType() {
+    getCategory() {
         axios.get('/api/category', {
             headers: {"Authorization": 'Bearer '+this.state.token}
         }).then(res => {
-            console.log(res.data.data)
-            this.setState({category: res.data.data});
+            console.log("category",res.data.data)
+            let expense = [];
+            let income = [];
+            for ( let item of res.data.data) {
+                console.log('item: ',item)
+                if (item.type === "EXPENSE") {
+                    expense.push(item);
+                } else if(item.type === "INCOME") {
+                    income.push(item);
+                }
+            }
+            this.setState({category: res.data.data, categoryCur: expense})
         })
+    }
+
+    setCategoryByType(type) {
+        let category = [];
+        for ( let item of this.state.category) {
+            console.log('item: ',item)
+            if (item.type === type[0]) {
+                category.push(item);
+            } 
+        }
+        console.log(category);
+        this.setState({categoryCur: []})
+        this.setState({categoryCur: category});
     }
 
     createNewBill(values) {
@@ -55,33 +78,43 @@ class EditBill extends React.Component {
             headers: {"Authorization": 'Bearer '+this.state.token}
         }).then(res => {
             console.log(res.data.data);
+            if(res.status === 200) {
+                this.setState({createStatus: 200});
+            }
         })
     }
 
+    back = () => {
+        document.location.replace("/billList")
+    }
+
     render () {
-        let category = this.state.category;
-        let categoryName;
+        let category = this.state.categoryCur;
+        let categoryList;
         if (category.length > 0) {
-            categoryName = (
+            categoryList = (
                 <Radio.Group
-                    value={this.state.categoryValue}
-                    onChange={(val) => {
-                        this.setState({categoryValue: val})
-                    }}
+                    value="category"
                 >
                 <Space>
                 {
                 category.map((item, index) =>{
-                    return  (<Radio value={item.id} key={index}>{item.name}</Radio>);
+                    return  (<Radio value={item.id} key={index}>{item.name}</Radio>); 
                 })
                 }
                 </Space>
                 </Radio.Group> 
             )
         }
+        if (this.state.createStatus === 200) {
+            return (<Navigate to="/billList" />)
+        }
         return (
             <div>
+                <NavBar onBack={this.back}>
+                    记一笔</NavBar>
                 <Form
+                    initialValues={{type:['EXPENSE']}}
                     onFinish={this.onFinish}
                     footer={
                         <Button block type='submit' color='primary'>
@@ -93,7 +126,7 @@ class EditBill extends React.Component {
                         name='type' 
                         label='类型'
                         rules={[{ required: true, message: '请选择类型' }]}
-                        initialValue={['EXPENSE']}
+                        
                     >
                         <Selector
                             columns={2}
@@ -101,7 +134,11 @@ class EditBill extends React.Component {
                                 { label: '支出', value: 'EXPENSE' },
                                 { label: '收入', value: 'INCOME' },
                             ]}
-                            onChange={(arr) => console.log(arr)}  
+                            onChange={(arr) => {
+                                console.log(arr);
+                                this.setState({type: arr});
+                                this.setCategoryByType(arr);
+                            }}  
                         />
                     </Form.Item>
                     <Form.Item
@@ -109,7 +146,7 @@ class EditBill extends React.Component {
                         label='类别'
                         rules={[{ required: true, message: '请选择类别' }]}
                         >
-                        {categoryName}
+                        {categoryList}
                     </Form.Item>
                     <Form.Item
                         name='date'

@@ -37,7 +37,7 @@ class BillDetail extends React.Component {
         return (
             <div>
                 <NavBar onBack={this.back}>
-                    标题</NavBar>
+                    详情</NavBar>
                 <Descriptions
                     title="明细"
                     // size={state.size}
