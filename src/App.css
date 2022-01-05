@@ -4,6 +4,7 @@
 @import './style/tabbar.css';
 @import './style/billList.css';
 @import './style/dayBillList.css';
+@import './style/billCard.css';
 
 #root {
   height: 100%;

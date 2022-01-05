@@ -1,0 +1,12 @@
+.balance {
+    line-height: 40px;
+    font-size: x-large;
+    text-align: center;
+    background-color: #F9DA61;
+}
+
+.income-expense {
+    line-height: 40px;
+    text-align: center;
+    background-color: #F9DA61;
+}

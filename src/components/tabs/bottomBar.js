@@ -21,7 +21,7 @@ function BottomBar () {
             icon: <BillOutline />,
         },
         {
-            key: '/bill',
+            key: '/bill/yearly',
             title: '账单',
             icon: <FileOutline />,
         },
