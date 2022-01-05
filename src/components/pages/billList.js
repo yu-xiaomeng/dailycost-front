@@ -66,7 +66,7 @@ class BillList extends React.Component {
             dayBillList = (
                 <div id="scrollableDiv"
                         style={{
-                        height: 640,
+                        height: 500,
                         overflow: 'auto',
                         padding: '0 1px',
                         }}>
