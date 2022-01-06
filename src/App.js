@@ -11,6 +11,7 @@ import Me from "./components/pages/me";
 import BillDetail from "./components/pages/billDetail";
 import EditBill from "./components/pages/editBill";
 import YearlyBill from "./components/pages/yearlyBill";
+import Report from "./components/pages/report";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/bill/:id' element={<BillDetail />}/>
           <Route path='/bill/new' element={<EditBill />}/>
           <Route path='/bill/yearly' element={<YearlyBill />}/>
+          <Route path='/report' element={<Report />}/>
         </Routes>
     </Router>
   );
