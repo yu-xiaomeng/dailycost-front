@@ -34,7 +34,7 @@ class DayBillList extends React.Component {
                                 avatar={<Avatar src={item.categoryIconUrl} />}
                                 title={<a href={this.getDetailRoute(item.bill.id)}>{item.categoryName}</a>}
                                 // title={<a href="/bill/596d6ded-db59-4720-a41b-b0ce3019ac8e">{item.createdBy}</a>}
-                                description={item.bill.note}
+                                description={item.bill.note || "--" }
                                 
                             />
                             <Amount type={item.bill.type} amount={item.bill.amount}/>

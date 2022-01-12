@@ -8,3 +8,6 @@
     padding: 10px;
 }
 
+.ant-list-item-meta-avatar {
+    align-self: center;
+}
