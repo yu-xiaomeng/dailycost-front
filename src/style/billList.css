@@ -38,3 +38,17 @@
   width: 100%;
   background-color: #fbfbfb;
 }
+
+.month-total-item {
+    font-size: 16px;
+    line-height: 48px;
+}
+
+.yearly .adm-divider {
+    margin: 1px 0;
+}
+
+.yearly .list-header {
+    background-color: #f0f0f0;
+    line-height: 24px;
+}
