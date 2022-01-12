@@ -35,11 +35,9 @@ class Login extends React.Component {
                 console.log(res);
                 console.log(res.data)
                 if(res.status === 200) {
-                    this.setState({isLogin: true});
                     let cookieTime = new Date(res.data.timestamp + 2 * 3600 * 1000); 
-                    console.log(cookieTime);
                     cookie.save("token", res.data.data.token, {expires: cookieTime});
-                    console.log(this.state.isLogin, cookie.load("token"));
+                    this.setState({isLogin: true});
                 }
               
             })
