@@ -1,6 +1,6 @@
 import React from "react";
 
-import { List, Avatar, Space } from "antd";
+import { List, Avatar, Space, Row, Col } from "antd";
 import Amount from "./amount"
 
 class DayBillList extends React.Component {
@@ -16,11 +16,11 @@ class DayBillList extends React.Component {
         return (
             <div className="day">
                 <div className="day-total">
-                    <Space>
-                    {this.state.billList.date}
-                    收入: {this.state.billList.income}
-                    支出: {this.state.billList.expense} 
-                    </Space> 
+                    <Row>
+                        <Col span={12}>{this.state.billList.date}</Col>
+                        <Col span={6}>收入: {this.state.billList.income}</Col>
+                        <Col span={6}>支出: {this.state.billList.expense} </Col>
+                    </Row>
                 </div>
                 <div className="day-each">
                     <List
@@ -31,13 +31,13 @@ class DayBillList extends React.Component {
                         renderItem={item => (
                         <List.Item>
                             <List.Item.Meta
-                                avatar={<Avatar src="https://randomuser.me/api/portraits/men/15.jpg" />}
-                                title={<a href={this.getDetailRoute(item.id)}>{item.createdBy}</a>}
+                                avatar={<Avatar src={item.categoryIconUrl} />}
+                                title={<a href={this.getDetailRoute(item.bill.id)}>{item.categoryName}</a>}
                                 // title={<a href="/bill/596d6ded-db59-4720-a41b-b0ce3019ac8e">{item.createdBy}</a>}
-                                description={item.note}
+                                description={item.bill.note}
                                 
                             />
-                            <Amount type={item.type} amount={item.amount}/>
+                            <Amount type={item.bill.type} amount={item.bill.amount}/>
                         </List.Item>
                         )}
                     />
