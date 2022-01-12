@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 import cookie from "react-cookies";
-import { Descriptions } from 'antd';
-import { NavBar, Button,  Modal, Toast} from 'antd-mobile';
+import { Avatar, Image } from 'antd';
+import { NavBar, Button,  Modal, Toast, List, Space} from 'antd-mobile';
 import { Navigate } from "react-router-dom";
 
 class BillDetail extends React.Component {
@@ -10,6 +10,8 @@ class BillDetail extends React.Component {
         token: cookie.load("token"),
         id: "",
         bill: {},
+        categoryName: "",
+        categoryIconUrl: "",
         deleted: false,
     }
 
@@ -17,7 +19,7 @@ class BillDetail extends React.Component {
         axios.get('/api/bill/'+id,{
             headers: {"Authorization": 'Bearer '+this.state.token}
         }).then(res => {
-            this.setState({bill: res.data.data});
+            this.setState({bill: res.data.data.bill, categoryName: res.data.data.categoryName, categoryIconUrl: res.data.data.categoryIconUrl});
         })
     }
 
@@ -55,20 +57,33 @@ class BillDetail extends React.Component {
             <div>
                 <NavBar onBack={this.back}>
                     详情</NavBar>
-                <Descriptions
-                    title="明细"
-                    // size={state.size}
-                    // extra={<Button type="primary">Edit</Button>}
-                    >
-                    <Descriptions.Item label="类别">{this.state.bill.categoryId}</Descriptions.Item>
-                    <Descriptions.Item label="类型">{this.state.bill.type}</Descriptions.Item>
-                    <Descriptions.Item label="金额">{this.state.bill.amount}</Descriptions.Item>
-                    <Descriptions.Item label="日期">{this.state.bill.date}</Descriptions.Item>
-                    <Descriptions.Item label="备注">{this.state.bill.note}</Descriptions.Item>
-                    
-                </Descriptions>
-                {/* <Button>编辑</Button> */}
+                <div className="detail-category">
+                <Avatar src={<Image src={this.state.categoryIconUrl} style={{ backgroundColor: '#ffffff', width: 32 }} />} />
+
+                    <br/>
+                    {this.state.categoryName}
+                </div>
+                <List mode='card'>
+                    <List.Item title='类型'>{this.state.bill.type}</List.Item>
+                    <List.Item title='金额'>{this.state.bill.amount}</List.Item>
+                    <List.Item title='日期'>{this.state.bill.date}</List.Item>
+                    <List.Item title='备注'>{this.state.bill.note}</List.Item>
+                </List>
+                <div className="detail-operation">
+                <Space style={{ '--gap': '50px' }}>
                 <Button
+                    color='default'
+                    fill='solid'
+                    onClick={() =>
+                        Toast.show({
+                          content: '功能还在开发中～',
+                        })
+                      }
+               
+                >编辑</Button>
+                <Button
+                    color='default'
+                    fill='outline'
                     onClick={() =>
                     Modal.confirm({
                         title: "确认删除？",
@@ -88,7 +103,8 @@ class BillDetail extends React.Component {
                 >
                     删除
                 </Button>
-                
+                </Space>
+                </div>
             </div>
         )
     }

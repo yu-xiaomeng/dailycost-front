@@ -5,6 +5,7 @@
 @import './style/billList.css';
 @import './style/dayBillList.css';
 @import './style/billCard.css';
+@import './style/billDetail.css';
 
 #root {
   height: 100%;

@@ -1,0 +1,20 @@
+.detail-category {
+    line-height: 36px;
+    align-self: center;
+    text-align: center;
+    background-color: var(--adm-color-primary);
+}
+
+.adm-nav-bar {
+    background-color: var(--adm-color-primary);
+}
+
+.detail-operation {
+    line-height: 100px;
+    align-self: center;
+    text-align: center;
+}
+
+.detail-operation .adm-button {
+    padding: 7px 50px;
+}    

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { List, Avatar, Space, Row, Col } from "antd";
+import { List, Avatar,  Row, Col } from "antd";
 import Amount from "./amount"
 
 class DayBillList extends React.Component {
