@@ -1,9 +1,5 @@
 import React from 'react'
-import cookie from "react-cookies";
-import axios from "axios";
 import {Row, Col, Divider} from "antd";
-// import {Divider,DatePicker, Toast, Button, NavBar, Card} from "antd-mobile";
-
 class BillCard extends React.Component {
     render () {
         return (

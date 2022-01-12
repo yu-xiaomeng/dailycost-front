@@ -1,6 +1,4 @@
-import axios from 'axios';
 import React from 'react'
-import cookie from 'react-cookies';
 import BottomBar from "../tabs/bottomBar";
 
 
