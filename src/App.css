@@ -6,6 +6,7 @@
 @import './style/dayBillList.css';
 @import './style/billCard.css';
 @import './style/billDetail.css';
+@import './style/me.css';
 
 #root {
   height: 100%;

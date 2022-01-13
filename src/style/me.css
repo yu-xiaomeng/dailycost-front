@@ -1,0 +1,19 @@
+.user-info-card {
+    display: flex;
+    font-size: 24px;
+    background-color: var(--adm-color-primary);
+    padding: 30px;
+}
+
+.monthly-bill-card {
+    padding: 12px;
+}
+
+.monthly-bill-card .bill-key {
+    font-size: 12px;
+    color: #9b9b9b;
+}
+
+.monthly-bill-card .bill-value {
+    font-size: 18px;
+}
